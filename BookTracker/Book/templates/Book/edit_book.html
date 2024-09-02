@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Book Reading Time Tracking</title>
+    {% load static %}
+    <!---Custom CSS File--->
+    <link rel="stylesheet" href="{% static 'Book/css/tracking.css' %}" />
+
+
+</head>
+
+<body style="background-image: {% static 'Book/img/bg.jpg'  %}">
+    <!-- Sidebar -->
+    {% include 'sidebar.html' %}
+
+    {% comment %} <img src="{% static 'Book/img/bg.jpg'  %}"/> {% endcomment %}
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        <!-- Toggle Button -->
+
+
+        <section class="container">
+            <header>Edit book: {{ book.name }}</header>
+            <!--Form Started-->
+
+            
+            <form action="" method="post" class="form">
+
+                {% csrf_token %}
+                <div class="input-box">
+                    <label>Book Name</label>
+                    <input type="text" name="name" id="bookName" value="{{ book.name }}" required />
+                </div>
+
+                <div class="input-box">
+                    <label>Book Author</label>
+                    <input type="text" name="author" id="bookAuthor" value="{{ book.author }}" required />
+                </div>
+
+                <div class="input-box">
+                    <label>Book Pages</label>
+                    <input type="number" name="pages" min="0" id="bookPages" value="{{ book.pages }}" required />
+                </div>
+
+                <div class="input-box">
+                    <label>Time Spent</label>
+                    <input type="number" id="timeSpent" name="time_mins" value="{{ book.time_mins }}" min="1" step="1"
+                        placeholder="Enter time in minutes" required>
+                </div>
+                <button type="Submit">Save changes</button>
+            </form>
+            <!--form ended-->
+        </section>
+    </div>
+
+</body>
+
+</html>

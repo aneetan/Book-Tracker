@@ -23,3 +23,19 @@ def addBook(request):
 def viewBook(request):
     book = Book.objects.all()
     return render(request, 'Book/book_view.html', {'books': book})
+
+def editBook(request, book_id):
+    book = Book.objects.get(id=book_id)
+
+    if request.method == 'POST':
+        # Update the book details
+        book.name = request.POST.get('name')
+        book.author = request.POST.get('author')
+        book.pages = request.POST.get('pages')
+        book.time_mins = request.POST.get('time_mins')
+        book.save()
+
+        messages.success(request, "Book updated successfully")
+        return redirect('viewBook')
+    
+    return render(request, 'Book/edit_book.html', {'book': book})
