@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Book Reading Time Tracking</title>
+    <!---Custom CSS File--->
+    <style>
+        /* Import Google font - Poppins */
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: url(./img/bg.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 2;
+        }
+
+        .sidebar-header {
+            padding: 10px;
+            background: #333;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-header h2 {
+            margin-left: 10px;
+        }
+
+        .close-btn {
+            font-size: 30px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-menu li {
+            padding: 10px 15px;
+        }
+
+        .sidebar-menu li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar-menu li a:hover {
+            background: #575757;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            transition: margin-left 0.5s;
+            padding: 20px;
+        }
+
+        .open-btn {
+            font-size: 20px;
+            background: #0250fa;
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1;
+        }
+
+        .open-btn:hover {
+            background: #0056ff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <button class="open-btn" id="open-btn">&#9776; </button>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+            <button class="close-btn" id="close-btn">&times;</button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="{% url 'addBook' %}">Add Book</a></li>
+            <li><a href="{% url 'viewBook' %}">View Book</a></li>
+        </ul>
+    </div>
+
+
+    <!-- JavaScript for Sidebar Toggle -->
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const openBtn = document.getElementById('open-btn');
+        const closeBtn = document.getElementById('close-btn');
+
+        openBtn.addEventListener('click', () => {
+            sidebar.style.width = '250px';
+            document.getElementById('main-content').style.marginLeft = '250px';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.style.width = '0';
+            document.getElementById('main-content').style.marginLeft = '0';
+        });
+    </script>
+</body>
+
+</html>

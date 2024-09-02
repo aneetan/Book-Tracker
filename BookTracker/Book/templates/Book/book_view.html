@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>View Book</title>
+    <!---Custom CSS File--->
+    {% load static %}
+    <!---Custom CSS File--->
+    <link rel="stylesheet" href="{% static 'Book/css/tracking.css' %}" />
+
+</head>
+
+<body>
+    <!-- Sidebar -->
+    {% include 'sidebar.html' %}
+
+    <!-- Main Content -->
+    <div class="main" >
+        <header>Book List</header>
+        {% if messages %}
+        <div>
+        {% for message in messages %}
+            <div style="color:green">
+                {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+
+
+
+        <section class="view-container">
+           
+            <!--Form Started-->
+        {% for book in books%}
+
+
+            <div class="row">
+                <!-- List section -->
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col text-end">
+                            <div class="form-group">
+                                <h4 style="color: #0250fa;"> {{book.name}} </h4>
+                                <p style="color: #c0c0c0; font-size: 10px;"> {{book.created|timesince}} </p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h5><em> {{book.author}} </em></h5>
+                        </div>
+    
+                        <div class="form-group">
+                            <p style="text-align: justify; font-size: 14px;">
+                                Pages: {{book.pages}}
+                            </p>
+                        </div>
+    
+                        <div class="view-info">
+                            <p style="text-align: justify; font-size: 14px;">
+                                Time : {{book.time_mins}} minutes
+                            </p>
+                        </div>
+                    </div>
+
+                   
+                </div>              
+            </div>
+            <hr>
+        {% endfor %}
+
+            
+        </section>
+
+    </div>
+
+</body>
+
+</html>
